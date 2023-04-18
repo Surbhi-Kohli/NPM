@@ -17,38 +17,39 @@ The npm link command is special because it allows you to load a module from anyw
 
 __1. Create (or download) an npm module to your computer__:
 
-     ``cd ~/Desktop
+       cd ~/Desktop
        git clone git@github.com:klughammer/node-randomstring.git (consider like gscope-core)
+       
 __2. Run npm link inside the module’s root folder__:
 
-cd ~/Desktop/node-randomstring
-npm link     //this will make the randomstring module available for linking:npm creates a symbolic
-            //link from your “global node_modules” directory to the local module’s directory.
-3. In a different directory, run npm link <module_name>:
+        cd ~/Desktop/node-randomstring
+        npm link     //this will make the randomstring module available for linking:npm creates a symbolic
+                    //link from your “global node_modules” directory to the local module’s directory.
+__3. In a different directory, run npm link <module_name>__:
 
-mkdir ~/Desktop/my-project
-cd ~/Desktop/my-project
-npm link randomstring
-4. Now, you can require the linked module from within your project:
+        mkdir ~/Desktop/my-project
+        cd ~/Desktop/my-project
+        npm link randomstring
+__4. Now, you can require the linked module from within your project__:
 
- ~/Desktop/my-project/app.js
-const randomstring = require("randomstring");
-console.log(randomstring.generate());
+         ~/Desktop/my-project/app.js
+        const randomstring = require("randomstring");
+        console.log(randomstring.generate());
 The cool thing about npm link is that any change you make in your required module will be immediately reflected in your project.
 
 For example, let us replace the generate() function with a slightly less useful one:
 
- ~/Desktop/node-randomstring/lib/randomstring
-exports.generate = function(){
-  return 4; // chosen by fair dice roll.
-            // guaranteed to be random.
-}
+         ~/Desktop/node-randomstring/lib/randomstring
+        exports.generate = function(){
+          return 4; // chosen by fair dice roll.
+                    // guaranteed to be random.
+        }
 If we run our app again, we will see a result of 4.
 
 Being able to load a local module is really useful if you want to make changes on the required module and test 
 them immediately in the context of your project, without going through a publish/install cycle.
 
-How does it work?
+# How does it work?
 It might seem like npm link is doing some magic to side-step Node’s module loading strategy, but the truth is there is nothing special about it:
 npm link just creates two symbolic links.
 
@@ -75,7 +76,7 @@ When you run npm link <module_name> in a project’s directory, npm creates a sy
 from ./node_modules/<module_name> to <global_node_modules>/<module_name>.
 
 You can see the symlink that was created by running:
-> ls -al ./node_modules
+     > ls -al ./node_modules
 lrwxrwxrwx 1 alexishevia alexishevia   64 Mar 22 21:19 randomstring -> ../../../.nvm/versions/node/v6.9.5/lib/node_modules/randomstring
 
 Since I am using nvm, my global node_modules folder is: /home/alexishevia/.nvm/versions/node/v6.9.5/lib/node_modules
