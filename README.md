@@ -30,14 +30,14 @@ cd ~/Desktop/my-project
 npm link randomstring
 4. Now, you can require the linked module from within your project:
 
-# ~/Desktop/my-project/app.js
+ ~/Desktop/my-project/app.js
 const randomstring = require("randomstring");
 console.log(randomstring.generate());
 The cool thing about npm link is that any change you make in your required module will be immediately reflected in your project.
 
 For example, let us replace the generate() function with a slightly less useful one:
 
-# ~/Desktop/node-randomstring/lib/randomstring
+ ~/Desktop/node-randomstring/lib/randomstring
 exports.generate = function(){
   return 4; // chosen by fair dice roll.
             // guaranteed to be random.
