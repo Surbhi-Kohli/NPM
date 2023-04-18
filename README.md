@@ -3,8 +3,9 @@ src:https://medium.com/@alexishevia/the-magic-behind-npm-link-d94dcb3a81af
 
 Node.js has a very simple module loading strategy. Whenever you require() a module, the following steps are executed in order:
 
-If it is a core module, load the core module.
+    If it is a core module, load the core module.
 If it is a relative path, load the module from the relative path.
+
 Look for the module in the ./node_modules directory. If it is not there, recursively search in the 
 parent directories’ ./node_modules until either the module is found or the root of the file system is reached.
 Note: You can specify a NODE_PATH environment variable to make Node.js search for modules in other folders, but it is not recommended.
@@ -12,13 +13,13 @@ Note: You can specify a NODE_PATH environment variable to make Node.js search fo
 Loading a local module
 The npm link command is special because it allows you to load a module from anywhere on your computer.
 
-Here is an example:
+# Here is an example:
 
-1. Create (or download) an npm module to your computer:
+__1. Create (or download) an npm module to your computer__:
 
-cd ~/Desktop
-git clone git@github.com:klughammer/node-randomstring.git (consider like gscope-core)
-2. Run npm link inside the module’s root folder:
+     ``cd ~/Desktop
+       git clone git@github.com:klughammer/node-randomstring.git (consider like gscope-core)
+__2. Run npm link inside the module’s root folder__:
 
 cd ~/Desktop/node-randomstring
 npm link     //this will make the randomstring module available for linking:npm creates a symbolic
